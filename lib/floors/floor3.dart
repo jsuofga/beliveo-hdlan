@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:hdlan_beliveo/models/cisco_small_business_switch.dart';
+import 'package:hdlan_beliveo/models/tvModel.dart';
+
+class Floor3 extends StatefulWidget {
+  const Floor3({Key? key}) : super(key: key);
+
+  @override
+  _Floor3State createState() => _Floor3State();
+}
+
+class _Floor3State extends State<Floor3> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Wrap(
+              children: [
+                TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'16'),
+                TVButton(tvLabel:'Screen2',mdf_idf: '1',port:'17'),
+                TVButton(tvLabel:'Screen3',mdf_idf: '1',port:'18'),
+                TVButton(tvLabel:'Screen4',mdf_idf: '1',port:'19'),
+                TVButton(tvLabel:'Screen5',mdf_idf: '1',port:'20'),
+                TVButton(tvLabel:'Screen6',mdf_idf: '1',port:'21'),
+              ],
+            )
+          ]
+
+      ),
+
+    );
+  }
+}
+
