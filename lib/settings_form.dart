@@ -49,15 +49,16 @@ class _SettingsFormState extends State<SettingsForm> {
   Widget build(BuildContext context) {
 
     return Form(
-
         key: _formKey,
+
 
         child: Column(
 
           children: [
+            SizedBox(height:40.0),
             Text('IP Address of MDF'),
             TextFormField(
-              initialValue:_ip_mdf ,
+                initialValue:_ip_mdf ,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                   ),
@@ -101,7 +102,6 @@ class _SettingsFormState extends State<SettingsForm> {
                 validator: (val) {
                   //Regular Expression check of IP address
                   if(!RegExp(r"^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$").hasMatch(val!) ){
-                    print('eye of tiger ${val}');
                     return 'Enter IP address of IDF Switch';
                   }else{
                     setState(() {
@@ -115,13 +115,13 @@ class _SettingsFormState extends State<SettingsForm> {
             Text('User Name'),
             TextFormField(
                 initialValue: _userName ,
-                obscureText:true,
+                obscureText:false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                     ),
                     // icon:Icon(Icons.person),
                     hintText: 'User Name',
-                    labelText: 'not shown'
+                    labelText: _userName
                 ),
                 onChanged: (val){
                   setState(() {
@@ -144,13 +144,13 @@ class _SettingsFormState extends State<SettingsForm> {
             Text('Password'),
             TextFormField(
                 initialValue:_passWord,
-                obscureText:true,
+                obscureText:false,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                     ),
                     // icon:Icon(Icons.person),
                     hintText: 'Password',
-                    labelText: 'not shown'
+                    labelText: _passWord
                 ),
                 onChanged: (val){
                   setState(() {
@@ -172,19 +172,50 @@ class _SettingsFormState extends State<SettingsForm> {
             ),
             Visibility(
               visible: needToChangeIP,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton.icon(
+                    icon: Icon(Icons.close),
+                    label: Text('Cancel'),
+                    style: ElevatedButton.styleFrom(
+                      primary:Colors.red,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }
+                ),
+                  ElevatedButton.icon(
+                      icon: Icon(Icons.check),
+                      label: Text('Submit'),
+                      style: ElevatedButton.styleFrom(
+                        primary:Colors.green,
+                      ),
+                      onPressed: () {
+                        // Validate returns true if the form is valid, or false otherwise.
+                        if (_formKey.currentState!.validate()) {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                         print('success');
+                         // Save IP address to storage
+                         _saveIPaddress();
+                         Navigator.pop(context); // Closes the Bottom Modal
+                        }
+                      }
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: !needToChangeIP,
               child: ElevatedButton.icon(
                   icon: Icon(Icons.check),
-                  label: Text('Submit'),
+                  label: Text('OK'),
+                  style: ElevatedButton.styleFrom(
+                    primary:Colors.green,
+                  ),
                   onPressed: () {
-                    // Validate returns true if the form is valid, or false otherwise.
-                    if (_formKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-                     print('success');
-                     // Save IP address to storage
-                     _saveIPaddress();
-                     Navigator.pop(context); // Closes the Bottom Modal
-                    }
+                    Navigator.pop(context); // Closes the Bottom Modal
                   }
               ),
             ),

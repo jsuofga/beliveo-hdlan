@@ -20,6 +20,7 @@ class _AdminAccessState extends State<AdminAccess> {
         child: Column(
 
           children: [
+            SizedBox(height:40.0),
             Text('ADMIN Password'),
             TextFormField(
                 initialValue: '',
@@ -45,20 +46,38 @@ class _AdminAccessState extends State<AdminAccess> {
                   }
                 }
             ),
-            ElevatedButton.icon(
-                icon: Icon(Icons.check),
-                label: Text('Submit'),
-                onPressed: () {
-                  // Validate returns true if the form is valid, or false otherwise.
-                  if (_formKey.currentState!.validate()) {
-                    // If the form is valid, display a snackbar. In the real world,
-                    // you'd often call a server or save the information in a database.
-                    Provider.of<UserInterfaceModel>(context,listen: false).showIP();
-                    //Navigator.pop(context); // Closes the Bottom Modal
-                  }else{
-                    Provider.of<UserInterfaceModel>(context,listen: false).hideIP();
-                  }
-                }
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton.icon(
+                    icon: Icon(Icons.close),
+                    label: Text('Cancel'),
+                    style: ElevatedButton.styleFrom(
+                      primary:Colors.red,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }
+                ),
+                ElevatedButton.icon(
+                    icon: Icon(Icons.check),
+                    label: Text('Submit'),
+                    style: ElevatedButton.styleFrom(
+                      primary:Colors.green,
+                    ),
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (_formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        Provider.of<UserInterfaceModel>(context,listen: false).showIP();
+                        //Navigator.pop(context); // Closes the Bottom Modal
+                      }else{
+                        Provider.of<UserInterfaceModel>(context,listen: false).hideIP();
+                      }
+                    }
+                ),
+              ],
             ),
 
           ],

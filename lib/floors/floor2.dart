@@ -15,8 +15,15 @@ class _Floor2State extends State<Floor2> {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Floor 2',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0
+                ),
+
+              ),
             Wrap(
               children: [
                 TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'10'),
@@ -25,6 +32,7 @@ class _Floor2State extends State<Floor2> {
                 TVButton(tvLabel:'Screen4',mdf_idf: '1',port:'13'),
                 TVButton(tvLabel:'Screen5',mdf_idf: '1',port:'14'),
                 TVButton(tvLabel:'Screen6',mdf_idf: '1',port:'15'),
+                TVButton(tvLabel:'Floor 2 Screens', mdf_idf: '1',  port:'10-15'),
               ],
             )
           ]

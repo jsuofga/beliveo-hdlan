@@ -11,23 +11,28 @@ class Floor1 extends StatefulWidget {
 
 class _Floor1State extends State<Floor1> {
 
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return  Center(
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            Text('Floor 1',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40.0
+              ),
+
+            ),
             Wrap(
               children: [
                 TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'9'),
                 TVButton(tvLabel:'Screen2',mdf_idf: '1',port:'10'),
                 TVButton(tvLabel:'Screen3',mdf_idf: '1',port:'11'),
+                TVButton(tvLabel:'Floor 1 Screens', mdf_idf: '1',  port:'9-11'),
               ],
-            )
+            ),
+
           ]
       ),
 

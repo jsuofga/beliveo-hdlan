@@ -70,20 +70,39 @@ class _VideoInputState extends State<VideoInput> {
             if(switchUnit =='1'){
               String ip =  await Provider.of<SwitchingModel>(context,listen: false).getIPAddressMDFSwitch();
               CiscoSmbSwitch(ipAddress: ip,username:username, password:password).connect({
-                'interfaceType':'interface',
+                // 'interfaceType':'interface',
+                'interfaceType': Provider.of<SwitchingModel>(context,listen: false).port.contains('-') ? 'interface range':'interface',
                 'gi': Provider.of<SwitchingModel>(context,listen: false).port,
                 'switchportType':'switchport access',
                 'vlan':Provider.of<SwitchingModel>(context,listen: false).vlan
               });
 
-            }else{
+            }else if(switchUnit =='2'){
               String ip =  await Provider.of<SwitchingModel>(context,listen: false).getIPAddressIDFSwitch();
               CiscoSmbSwitch(ipAddress: ip,username:username, password:password).connect({
-                'interfaceType':'interface',
+                //'interfaceType':'interface',
+                'interfaceType': Provider.of<SwitchingModel>(context,listen: false).port.contains('-') ? 'interface range':'interface',
                 'gi': Provider.of<SwitchingModel>(context,listen: false).port,
                 'switchportType':'switchport access',
                 'vlan':Provider.of<SwitchingModel>(context,listen: false).vlan
               });
+            }else if(switchUnit =='all') {
+               print ( 'i need to switch both idf and mdf');
+               String ip_mdf =  await Provider.of<SwitchingModel>(context,listen: false).getIPAddressMDFSwitch();
+                CiscoSmbSwitch(ipAddress: ip_mdf,username:username, password:password).connect({
+                 'interfaceType':'interface range',
+                 'gi': '10-24',
+                 'switchportType':'switchport access',
+                 'vlan':Provider.of<SwitchingModel>(context,listen: false).vlan
+               });
+               String ip_idf =  await Provider.of<SwitchingModel>(context,listen: false).getIPAddressIDFSwitch();
+               CiscoSmbSwitch(ipAddress: ip_idf,username:username, password:password).connect({
+                 'interfaceType':'interface range',
+                 'gi': '1-24',
+                 'switchportType':'switchport access',
+                 'vlan':Provider.of<SwitchingModel>(context,listen: false).vlan
+               });
+
             }
 
         },

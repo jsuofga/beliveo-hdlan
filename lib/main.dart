@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hdlan_beliveo/models/videoInputModel.dart';
+import 'package:hdlan_beliveo/video_input_panel.dart';
 import 'package:provider/provider.dart';
 import 'package:hdlan_beliveo/admin_access.dart';
 import 'package:hdlan_beliveo/settings_form.dart';
@@ -31,19 +33,25 @@ class Home extends StatefulWidget{
 
 class _HomeState extends State<Home> {
 
-  // Bottom Sheet Modal
+  // Bottom Sheet Modal - Admin and Settings
   void showSettingsPanel() {
-     showModalBottomSheet(context: context, builder: (context){
+     showModalBottomSheet(isScrollControlled: true,context: context, builder: (context){
       return Container(
-
         padding: EdgeInsets.symmetric(vertical: 10,horizontal: 50),
-
         child: Provider.of<UserInterfaceModel>(context).showIPform ? SettingsForm():AdminAccess()
-
       );
 
     }).whenComplete(() => Provider.of<UserInterfaceModel>(context,listen: false).hideIP() );
   }
+  // Bottom sheet  Modal-Video Inputs
+  void showVideoInputsPanel(){
+    showModalBottomSheet(context: context, builder: (context){
+      return VideoInputPanel();
+
+    });
+  }
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 
   //Defined variables
   int _currentIndex = 0;
@@ -120,12 +128,22 @@ class _HomeState extends State<Home> {
               icon: Icon(Icons.looks_6_rounded),
               title: Text('Floor6')
           )
-
         ],
 
       ),
 
-        );
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Provider.of<SwitchingModel>(context,listen: false).selectSwitchUnit('all');
+          showVideoInputsPanel();
+          
+        },
+        label: const Text('All Screens '),
+        icon: const Icon(Icons.apartment),
+        backgroundColor: Colors.indigo,
+      ),
+
+    );
 
   }
 }
