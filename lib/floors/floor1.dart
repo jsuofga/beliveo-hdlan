@@ -11,25 +11,30 @@ class Floor1 extends StatefulWidget {
 
 class _Floor1State extends State<Floor1> {
 
-  @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+
     return  Center(
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text('Floor 1',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40.0
-              ),
+            Container(
+              height: screenSize.height/3,
+              child: Center(
+                child: Text('Floor 1',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0
+                  ),
 
+                ),
+              ),
             ),
             Wrap(
               children: [
                 TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'9'),
                 TVButton(tvLabel:'Screen2',mdf_idf: '1',port:'10'),
-                TVButton(tvLabel:'Screen3',mdf_idf: '1',port:'11'),
-                TVButton(tvLabel:'Floor 1 Screens', mdf_idf: '1',  port:'9-11'),
+                TVButton(tvLabel:'Floor 1 Screens', mdf_idf: '1',  port:'9-10'),
               ],
             ),
 
@@ -39,4 +44,12 @@ class _Floor1State extends State<Floor1> {
     );
   }
 }
+//
+// Text('Floor 1',
+// style: TextStyle(
+// color: Colors.white,
+// fontSize: 40.0
+// ),
+//
+// ),
 

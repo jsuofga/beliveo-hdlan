@@ -11,6 +11,7 @@ class Floor4 extends StatefulWidget {
 class _Floor4State extends State<Floor4> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -13,6 +13,7 @@ class _Floor3State extends State<Floor3> {
 
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,13 +27,13 @@ class _Floor3State extends State<Floor3> {
             ),
             Wrap(
               children: [
-                TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'16'),
-                TVButton(tvLabel:'Screen2',mdf_idf: '1',port:'17'),
-                TVButton(tvLabel:'Screen3',mdf_idf: '1',port:'18'),
-                TVButton(tvLabel:'Screen4',mdf_idf: '1',port:'19'),
-                TVButton(tvLabel:'Screen5',mdf_idf: '1',port:'20'),
-                TVButton(tvLabel:'Screen6',mdf_idf: '1',port:'21'),
-                TVButton(tvLabel:'Floor 3 Screens', mdf_idf: '1',  port:'16-21'),
+                TVButton(tvLabel:'Screen1',mdf_idf: '1',port:'17'),
+                TVButton(tvLabel:'Screen2',mdf_idf: '1',port:'18'),
+                TVButton(tvLabel:'Screen3',mdf_idf: '1',port:'19'),
+                TVButton(tvLabel:'Screen4',mdf_idf: '1',port:'20'),
+                TVButton(tvLabel:'Screen5',mdf_idf: '1',port:'21'),
+                TVButton(tvLabel:'Screen6',mdf_idf: '1',port:'22'),
+                TVButton(tvLabel:'Floor 3 Screens', mdf_idf: '1',  port:'17-22'),
               ],
             )
           ]

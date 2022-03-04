@@ -11,6 +11,7 @@ class Floor6 extends StatefulWidget {
 class _Floor6State extends State<Floor6> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Center(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,9 +29,7 @@ class _Floor6State extends State<Floor6> {
                 TVButton(tvLabel:'Screen2',mdf_idf: '2',port:'14'),
                 TVButton(tvLabel:'Screen3',mdf_idf: '2',port:'15'),
                 TVButton(tvLabel:'Screen4',mdf_idf: '2',port:'16'),
-                TVButton(tvLabel:'Screen5',mdf_idf: '2',port:'17'),
-                TVButton(tvLabel:'Screen6',mdf_idf: '2',port:'18'),
-                TVButton(tvLabel:'Floor 6 Screens', mdf_idf: '2',  port:'13-18'),
+                TVButton(tvLabel:'Floor 6 Screens', mdf_idf: '2',  port:'13-16'),
               ],
             )
           ]

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hdlan_beliveo/models/videoInputModel.dart';
 import 'package:hdlan_beliveo/video_input_panel.dart';
 import 'package:provider/provider.dart';
 import 'package:hdlan_beliveo/admin_access.dart';
@@ -11,7 +10,8 @@ import 'package:hdlan_beliveo/floors/floor3.dart';
 import 'package:hdlan_beliveo/floors/floor4.dart';
 import 'package:hdlan_beliveo/floors/floor5.dart';
 import 'package:hdlan_beliveo/floors/floor6.dart';
-import 'package:flutter_launcher_icons/main.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
 
 void main() => runApp(
     MultiProvider(
@@ -72,6 +72,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context){
+
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
         appBar: AppBar(
           title: Image.asset("assets/logo-beliveo.png",height:50.0),
@@ -94,54 +97,46 @@ class _HomeState extends State<Home> {
        backgroundColor: Colors.grey[800],
         body: _screenList[_currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // For more than 3 bottom nav items
-        onTap: onTabTapped, // new
-        currentIndex: _currentIndex, // new
-        backgroundColor: Colors.black12,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.lightGreenAccent,
-
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.looks_one_rounded,
-            ),
-            title: new Text('Floor1'),
-          ),
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_two_rounded),
-              title: new Text('Floor2')
-          ),
-          BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_3_rounded),
-              title: Text('Floor3')
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.looks_4_rounded),
-              title: Text('Floor4')
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.looks_5_rounded),
-              title: Text('Floor5')
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.looks_6_rounded),
-              title: Text('Floor6')
-          )
-        ],
-
-      ),
-
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Provider.of<SwitchingModel>(context,listen: false).selectSwitchUnit('all');
           showVideoInputsPanel();
-          
+
         },
         label: const Text('All Screens '),
         icon: const Icon(Icons.apartment),
         backgroundColor: Colors.indigo,
       ),
+
+
+      bottomNavigationBar: Stack(
+        children: [
+          CurvedNavigationBar(
+          onTap: onTabTapped, // new
+          backgroundColor: Colors.black12,
+          animationDuration: Duration(milliseconds: 300),
+          // animationCurve: Curves.bounceInOut,
+          color: Colors.lightGreenAccent,
+          items: [
+            Icon(Icons.looks_one_rounded,color: Colors.indigoAccent,),
+            Icon(Icons.looks_two_rounded,color: Colors.indigoAccent),
+            Icon(Icons.looks_3_rounded,color: Colors.indigoAccent),
+            Icon(Icons.looks_4_rounded,color: Colors.indigoAccent),
+            Icon(Icons.looks_5_rounded,color: Colors.indigoAccent),
+            Icon(Icons.looks_6_rounded,color: Colors.indigoAccent),
+          ],
+        ),
+          Positioned(
+              bottom: 10,
+              left:screenSize.width/2 - 16,
+              child: Text('Floor',
+                style: TextStyle(color: Colors.indigoAccent,fontSize: 16,),
+
+              )
+          )
+        ]
+      ),
+
 
     );
 

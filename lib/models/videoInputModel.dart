@@ -91,7 +91,7 @@ class _VideoInputState extends State<VideoInput> {
                String ip_mdf =  await Provider.of<SwitchingModel>(context,listen: false).getIPAddressMDFSwitch();
                 CiscoSmbSwitch(ipAddress: ip_mdf,username:username, password:password).connect({
                  'interfaceType':'interface range',
-                 'gi': '10-24',
+                 'gi': '9-24',
                  'switchportType':'switchport access',
                  'vlan':Provider.of<SwitchingModel>(context,listen: false).vlan
                });
