@@ -12,6 +12,11 @@ class SettingsForm extends StatefulWidget {
 class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController textController_mdf = TextEditingController();
+  TextEditingController textController_idf = TextEditingController();
+  TextEditingController textController_username = TextEditingController();
+  TextEditingController textController_password = TextEditingController();
+
   String _ip_mdf = ''; // MDF switch ip address
   String _ip_idf = ''; // IDF switch ip address
   String _userName = '';
@@ -33,6 +38,10 @@ class _SettingsFormState extends State<SettingsForm> {
       _ip_idf = prefs.getString('ip_idf') ?? '';
       _userName = prefs.getString('username') ?? '';
       _passWord = prefs.getString('password') ?? '';
+      textController_mdf.text = _ip_mdf;
+      textController_idf.text = _ip_idf;
+      textController_username.text = _userName;
+      textController_password.text = _passWord;
 
     });
   }
@@ -58,35 +67,37 @@ class _SettingsFormState extends State<SettingsForm> {
             SizedBox(height:40.0),
             Text('IP Address of MDF'),
             TextFormField(
-                initialValue:_ip_mdf ,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                  ),
-                  // icon:Icon(Icons.person),
-                  hintText: 'Enter IP Address of MDF Switch',
-                  labelText: _ip_mdf
-              ),
-              onChanged: (val){
-                setState(() {
-                  needToChangeIP = true;
-                });
-              },
-              validator: (val) {
-                //Regular Expression check of IP address
-                if(!RegExp(r"^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$").hasMatch(val!) ){
-                    return 'Enter IP address of MDF Switch';
-                  }else{
-                    setState(() {
-                      print(val);
-                      _ip_mdf = val;
-                    });
-                    return null;
-                  }
-              }
+                //initialValue:_ip_mdf ,
+                controller: textController_mdf,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                    ),
+                    // icon:Icon(Icons.person),
+                    hintText: 'Enter IP Address of MDF Switch',
+                    labelText: _ip_mdf
+                ),
+                onChanged: (val){
+                  setState(() {
+                    needToChangeIP = true;
+                  });
+                },
+                validator: (val) {
+                  //Regular Expression check of IP address
+                  if(!RegExp(r"^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$").hasMatch(val!) ){
+                      return 'Enter IP address of MDF Switch';
+                    }else{
+                      setState(() {
+                        print(val);
+                        _ip_mdf = val;
+                      });
+                      return null;
+                    }
+                }
             ),
             Text('IP Address of IDF'),
             TextFormField(
-                initialValue:_ip_idf ,
+                //initialValue:_ip_idf ,
+                controller: textController_idf,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                     ),
@@ -114,14 +125,15 @@ class _SettingsFormState extends State<SettingsForm> {
             ),
             Text('User Name'),
             TextFormField(
-                initialValue: _userName ,
-                obscureText:false,
+                //initialValue: _userName ,
+                controller: textController_username,
+                obscureText:true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                     ),
                     // icon:Icon(Icons.person),
                     hintText: 'User Name',
-                    labelText: _userName
+                    labelText: 'User Name'
                 ),
                 onChanged: (val){
                   setState(() {
@@ -143,14 +155,15 @@ class _SettingsFormState extends State<SettingsForm> {
             ),
             Text('Password'),
             TextFormField(
-                initialValue:_passWord,
-                obscureText:false,
+                //initialValue:_passWord,
+                controller: textController_password,
+                obscureText:true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                     ),
                     // icon:Icon(Icons.person),
                     hintText: 'Password',
-                    labelText: _passWord
+                    labelText: 'Password'
                 ),
                 onChanged: (val){
                   setState(() {

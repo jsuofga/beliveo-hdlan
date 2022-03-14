@@ -81,6 +81,7 @@ class _HomeState extends State<Home> {
           centerTitle: true,
           backgroundColor: Colors.lightGreenAccent,
           actions: [
+            Text('v3.14.22'),
             TextButton.icon(
                 onPressed: () {
                   showSettingsPanel();
